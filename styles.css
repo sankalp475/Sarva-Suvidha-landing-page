@@ -26,6 +26,7 @@ body {
   --s: 205px;
   --c1: #161616;
   --c2: #000000;
+  --c3: rgba(22, 22, 22, 0.59);
   --_g: #ffffff00 90deg, var(--c1) 0;
   --_bg-pattern:
     conic-gradient(from 90deg at 1px 1px, var(--_g)),
@@ -181,10 +182,25 @@ header.header {
   left: 0;
   right: 0;
   border-bottom: 1px solid #ffffff56;
-  backdrop-filter: blur(40px);
+  backdrop-filter: blur(8px);
   z-index: 999999999;
+  background: var(--c3);
 }
-
+header.header::after {
+  content: "";
+  display: block;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  inset: 0;
+  opacity: 0.05;
+  background: url("./assets/bkg-noise.webp");
+  background-size: 200px 200px;
+  z-index: 99 !important;
+}
 header.header[data-mobile-nav-open="true"]>nav>ul.main-nav>li a:hover {
   color: rgb(0, 247, 255);
 }
@@ -231,14 +247,13 @@ header.header>nav#nav ul.main-nav li a {
   transition: all 0.3s ease-in-out;
 }
 
-.menu-item {
-  background:rgba(255,0,0,0.45);
-  padding: .5rem;
-  transition: .5s linear ease;
+.active {
+  color: rgba(2, 204, 255, 0.96);
 }
+/*
 .menu-item:hover {
-  background: rgba(255,0,0,0.75)
-}
+  background: rgba(185, 23, 23, 0.75)
+} */
 /* header.header[data-mobile-nav-open="false"] > nav#nav ul.main-nav {
   display: none;
 } */
