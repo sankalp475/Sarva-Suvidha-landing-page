@@ -231,6 +231,14 @@ header.header>nav#nav ul.main-nav li a {
   transition: all 0.3s ease-in-out;
 }
 
+.menu-item {
+  background:rgba(255,0,0,0.45);
+  padding: .5rem;
+  transition: .5s linear ease;
+}
+.menu-item:hover {
+  background: rgba(255,0,0,0.75)
+}
 /* header.header[data-mobile-nav-open="false"] > nav#nav ul.main-nav {
   display: none;
 } */
