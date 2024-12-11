@@ -1,27 +1,38 @@
+const theme = {
+    dark: "dark-theme",
+    light: "light-theme",
+}
 
+// document.documentElement.classList.add(JSON.parse( localStorage.getItem("theme")));
+// localStorage.setItem("theme", JSON.stringify(theme));
+// document.documentElement.classList.add(JSON.parse(localStorage.getItem("theme")).light);
 
 let winWidth = window.innerWidth;
 document.addEventListener('DOMContentLoaded', function () {
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const mainNav = document.querySelector('.main-nav');
     const header = document.querySelector('header.header');
-    // const .
-    menuBtn.addEventListener('click', function () {
 
+    // Apply the saved theme on page load
+    const savedTheme = JSON.parse(localStorage.getItem("theme"));
+    if (savedTheme) {
+        document.documentElement.classList.add(savedTheme);
+    } else {
+        // Default to light theme if no theme is saved
+        localStorage.setItem("theme", JSON.stringify(theme.light));
+        document.documentElement.classList.add(theme.light);
+    }
+
+    menuBtn.addEventListener('click', function () {
         if (header.dataset.mobileNavOpen === 'false') {
             header.dataset.mobileNavOpen = true;
-            menuBtn.children[0].setAttribute(
-                "name",
-                "close-outline"
-            );
+            menuBtn.children[0].setAttribute("name", "close-outline");
         } else {
             header.dataset.mobileNavOpen = false;
-            menuBtn.children[0].setAttribute(
-                "name",
-                "menu-outline"
-            );
+            menuBtn.children[0].setAttribute("name", "menu-outline");
         }
     });
+
 
     document.addEventListener('scroll', function () {
         if (window.scrollY >= 96) {
@@ -31,6 +42,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    document.querySelector("#mode-toggle").addEventListener("change", function () {
+        if (this.checked) {
+            localStorage.setItem("theme", JSON.stringify(theme.dark));
+        } else {
+            localStorage.setItem("theme", JSON.stringify(theme.light));
+        }
+        document.documentElement.classList.remove(theme.dark, theme.light);
+        document.documentElement.classList.add(
+            JSON.parse(localStorage.getItem("theme"))
+        );
+    });
 });
 
 var splide1 = new Splide('.splide1', {
